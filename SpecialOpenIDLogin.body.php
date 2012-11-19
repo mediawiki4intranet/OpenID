@@ -264,7 +264,7 @@ class SpecialOpenIDLogin extends SpecialOpenID {
 				$fullname = $sreg['fullname'];
 			}
 
-			if ( array_key_exists( 'http://axschema.org/namePerson/first', $ax ) || array_key_exists( 'http://axschema.org/namePerson/last', $ax ) ) {
+			if ( $ax && ( array_key_exists( 'http://axschema.org/namePerson/first', $ax ) || array_key_exists( 'http://axschema.org/namePerson/last', $ax ) ) ) {
 				$fullname = $ax['http://axschema.org/namePerson/first'][0] . " " . $ax['http://axschema.org/namePerson/last'][0];
 			}
 
@@ -497,6 +497,10 @@ class SpecialOpenIDLogin extends SpecialOpenID {
 	 */
 	function updateUser( $user, $sreg, $ax, $force = false ) {
 		global $wgAllowRealName, $wgEmailAuthentication, $wgOpenIDTrustEmailAddress;
+
+		if ( !$ax ) {
+			$ax = array();
+		}
 
 		// Nick name
 		if ( $this->updateOption( 'nickname', $user, $force ) ) {
