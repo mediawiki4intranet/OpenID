@@ -366,8 +366,8 @@ class OpenIDHooks {
 			}
 
 			# uoi_user_registration field was added in OpenID version 0.937
-			$updater->addExtensionField( 'user_openid', 'uoi_user_registration',
-				dirname( __FILE__ ) . '/patches/patch-add_uoi_user_registration.sql' );
+			$updater->addExtensionUpdate( array( 'addField', 'user_openid', 'uoi_user_registration',
+				dirname( __FILE__ ) . '/patches/patch-add_uoi_user_registration.sql', true ) );
 		}
 		return true;
 	}
