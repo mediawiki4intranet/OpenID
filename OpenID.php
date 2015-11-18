@@ -411,6 +411,7 @@ $wgAutoloadClasses['MediaWikiOpenIDMemcachedStore'] = $dir . 'MemcachedStore.php
 
 $wgSpecialPages['OpenIDIdentifier'] = 'SpecialOpenIDIdentifier';
 
+$wgHooks['UserLoginForm'][] = 'OpenIDHooks::onLoginForm';
 $wgHooks['PersonalUrls'][] = 'OpenIDHooks::onPersonalUrls';
 $wgHooks['BeforePageDisplay'][] = 'OpenIDHooks::onBeforePageDisplay';
 $wgHooks['ArticleViewHeader'][] = 'OpenIDHooks::onArticleViewHeader';

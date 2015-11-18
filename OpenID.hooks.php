@@ -7,6 +7,25 @@
 
 class OpenIDHooks {
 
+	public static function onLoginForm( &$template ) {
+		eval( '
+class OpenIDTemplateHack extends '.get_class( $template ).' {
+	function msg( $value ) {
+		if ( $value == "userlogin-noaccount" ) {
+			print wfMessage( "openid-nologin" )->parse()."<br />";
+		}
+		parent::msg( $value );
+	}
+}
+' );
+		$new = new OpenIDTemplateHack();
+		foreach ( $template as $k => $v ) {
+			$new->$k = $template->$k;
+		}
+		$template = $new;
+		return true;
+	}
+
 	public static function onSpecialPage_initList( &$specialPagesList ) {
 		global $wgOpenIDLoginOnly, $wgUser;
 

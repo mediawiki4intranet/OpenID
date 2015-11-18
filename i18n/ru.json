@@ -15,6 +15,7 @@
 	"openid-desc": "Вход в вики с помощью [//openid.net/ OpenID], а также вход на другие сайты поддерживающие OpenID с помощью учётной записи в вики",
 	"openididentifier": "Идентификатор OpenID",
 	"openidlogin": "Войти / создать учетную запись с OpenID",
+	"openid-nologin": "{{SERVER}}{{SCRIPTPATH}}/extensions/OpenID/skin/icons/openid-inputicon.png [[Special:OpenIDLogin|Вход с помощью OpenID]].",
 	"openidserver": "Сервер OpenID",
 	"openid-identifier-page-text-user": "Эта страница — идентификатор пользователя «$1».",
 	"openid-identifier-page-text-different-user": "Эта страница — идентификатор пользователя с ID $1.",

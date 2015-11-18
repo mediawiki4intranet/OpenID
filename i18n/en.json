@@ -10,6 +10,7 @@
 	"openid-desc": "Let users log in to the wiki with an [//openid.net/ OpenID].\nIf this is enabled on the wiki, they can also use their user account URL of this wiki as OpenID to log in to other OpenID-aware web sites",
 	"openididentifier": "OpenID Identifier",
 	"openidlogin": "Log in / create account with OpenID",
+	"openid-nologin": "{{SERVER}}{{SCRIPTPATH}}/extensions/OpenID/skin/icons/openid-inputicon.png [[Special:OpenIDLogin|Log in with OpenID]].",
 	"openidserver": "OpenID server",
 	"openid-identifier-page-text-user": "This page is the identifier for user \"$1\".",
 	"openid-identifier-page-text-different-user": "This page is the identifier for user ID $1.",
