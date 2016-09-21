@@ -736,21 +736,26 @@ class SpecialOpenIDServer extends SpecialOpenID {
 			wfSetupSession();
 		}
 
-		$_SESSION['openid_server_request'] = $request;
-		$_SESSION['openid_server_sreg'] = $sreg;
+		global $wgRequest;
+		$wgRequest->setSessionData(array(
+			'openid_server_request' => $request,
+			'openid_server_sreg' => $sreg,
+		));
 
 		return true;
 	}
 
 	function FetchValues() {
-		return array( $_SESSION['openid_server_request'], $_SESSION['openid_server_sreg'] );
+		global $wgRequest;
+		return array( $wgRequest->getSessionData( 'openid_server_request' ), $wgRequest->getSessionData( 'openid_server_sreg' ) );
 	}
 
 	function ClearValues() {
-		if ( isset( $_SESSION ) ) {
-			unset( $_SESSION['openid_server_request'] );
-			unset( $_SESSION['openid_server_sreg'] );
-		}
+		global $wgRequest;
+		$wgRequest->setSessionData(array(
+			'openid_server_request' => NULL,
+			'openid_server_sreg' => NULL,
+		));
 		return true;
 	}
 

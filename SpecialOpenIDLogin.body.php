@@ -1142,37 +1142,48 @@ class SpecialOpenIDLogin extends SpecialOpenID {
 	function saveValues( $response, $sreg, $ax ) {
 		$this->setupSession();
 
-		$_SESSION['openid_consumer_response'] = $response;
-		$_SESSION['openid_consumer_sreg'] = $sreg;
-		$_SESSION['openid_consumer_ax'] = $ax;
+		global $wgRequest;
+		$wgRequest->setSessionData(array(
+			'openid_consumer_response' => $response,
+			'openid_consumer_sreg' => $sreg,
+			'openid_consumer_ax' => $ax,
+		));
 
 		return true;
 	}
 
 	function clearValues() {
-		unset( $_SESSION['openid_consumer_response'] );
-		unset( $_SESSION['openid_consumer_sreg'] );
-		unset( $_SESSION['openid_consumer_ax'] );
+		global $wgRequest;
+		$wgRequest->setSessionData(array(
+			'openid_consumer_response' => NULL,
+			'openid_consumer_sreg' => NULL,
+			'openid_consumer_ax' => NULL,
+		));
 		return true;
 	}
 
 	function fetchValues() {
-		$response = isset( $_SESSION['openid_consumer_response'] ) ? $_SESSION['openid_consumer_response'] : null;
-		$sreg = isset( $_SESSION['openid_consumer_sreg'] ) ? $_SESSION['openid_consumer_sreg'] : array();
-		$ax = isset( $_SESSION['openid_consumer_ax'] ) ? $_SESSION['openid_consumer_ax'] : array();
+		global $wgRequest;
+		$response = $wgRequest->getSessionData( 'openid_consumer_response' );
+		$sreg = $wgRequest->getSessionData( 'openid_consumer_sreg' );
+		$ax = $wgRequest->getSessionData( 'openid_consumer_ax' );
 		return array( $response, $sreg, $ax );
 	}
 
 	function returnTo() {
-		$returnto = isset( $_SESSION['openid_consumer_returnto'] ) ? $_SESSION['openid_consumer_returnto'] : '';
-		$returntoquery = isset( $_SESSION['openid_consumer_returntoquery'] ) ? $_SESSION['openid_consumer_returntoquery'] : '';
+		global $wgRequest;
+		$returnto = $wgRequest->getSessionData( 'openid_consumer_returnto' );
+		$returntoquery = $wgRequest->getSessionData( 'openid_consumer_returntoquery' );
 		return array( $returnto, $returntoquery );
 	}
 
 	function setReturnTo( $returnto, $returntoquery ) {
 		$this->setupSession();
-		$_SESSION['openid_consumer_returnto'] = $returnto;
-		$_SESSION['openid_consumer_returntoquery'] = $returntoquery;
+		global $wgRequest;
+		$wgRequest->setSessionData(array(
+			'openid_consumer_returnto' => $returnto,
+			'openid_consumer_returntoquery' => $returntoquery,
+		));
 	}
 
 	protected function getGroupName() {
